@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>💖</title>
+
+  <style>
+    body {
+      background-color: #ffe6f0;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      overflow-x: hidden;
+    }
+
+    /* MAIN CONTAINER */
+    .container {
+      padding-top: 50px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* TITLE — FORCE ONE LINE & OFFSET RIGHT */
+    h1#title {
+      font-size: 42px;
+      color: #ff3366;
+      margin-bottom: 20px;
+      white-space: nowrap;     
+      text-align: center;
+      transform: translateX(20px); /* Shift slightly to the right */
+    }
+
+    /* BUTTON LAYOUT */
+    .buttons {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 360px;
+      margin-top: 10px;
+    }
+
+    .btn-slot {
+      width: 160px;
+      display: flex;
+      justify-content: center;
+    }
+
+    button {
+      padding: 15px 34px;
+      border: none;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      font-size: 22px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+
+    #yesBtn {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    #noBtn {
+      background-color: #f44336;
+      color: white;
+    }
+
+    img {
+      margin-top: 30px;
+      width: 220px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <!-- ONE LINE QUESTION -->
+    <h1 id="title">Will you be my Valentine? 💖</h1>
+
+    <div class="buttons">
+      <div class="btn-slot">
+        <button id="yesBtn" onclick="yesClicked()">Yes</button>
+      </div>
+      <div class="btn-slot">
+        <button id="noBtn" onclick="noClicked()">No</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Penguin -->
+  <img
+    src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3prNjZlMmwxaHMyZDRrZGZrbGN0d2x5eDdzcXBobW83OGJmcHRqYyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/kD62fyVdWl4UmtfLiA/giphy.gif"
+    alt="Cute Penguin"
+  >
+
+  <script>
+    let yesScale = 1;
+    let noScale = 1;
+    let noClicks = 0;
+
+    const noTexts = [
+      "No",
+      "Are you sure?",
+      "Please?",
+      "Pleaseee?",
+      "10000% sure?",
+      "Last chance…"
+    ];
+
+    function noClicked() {
+      noClicks++;
+
+      yesScale *= 1.6;
+      document.getElementById("yesBtn").style.transform = `scale(${yesScale})`;
+
+      noScale *= 0.85;
+      document.getElementById("noBtn").style.transform = `scale(${noScale})`;
+
+      document.getElementById("noBtn").innerText =
+        noTexts[Math.min(noClicks, noTexts.length - 1)];
+
+      if (noScale < 0.4) {
+        document.getElementById("noBtn").style.display = "none";
+      }
+    }
+
+    function yesClicked() {
+      document.body.innerHTML = `
+        <div style="
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          padding-top: 50px; 
+        ">
+          <!-- ONE LINE YES TEXT -->
+          <h1 style="
+            white-space: nowrap;
+            font-size: 42px;
+            color: #ff3366;
+            margin-bottom: 20px;
+            text-align: center;
+            transform: translateX(20px); /* Matches original title offset */
+          ">
+            Told you, you couldn’t resist! 🥰
+          </h1>
+
+          <img
+            src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExeXpxbG41azNlbXE3Y3VrMmhjOW1vMDMzZ2Q0MHQxeDhmaDV4dmp1dCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/nNfRs2Unc5VxI3VnQB/giphy.gif"
+            width="260"
+            alt="Penguin with heart"
+            style="margin-top: 20px;"
+          >
+        </div>
+      `;
+    }
+  </script>
+
+</body>
+</html>
